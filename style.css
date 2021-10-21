@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Grechen+Fuemen&display=swap');
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	font-family: 'Grechen Fuemen', cursive;
+}
+:root {
+	--main-size: 300px;
+	--main-color: rgb(212, 175, 55);
+	--secondary-color: rgb(140, 125, 112);
+}
+body {
+	background-color: var(--secondary-color);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	color: #fff;
+	letter-spacing: 2px;
+}
+strong {
+	color: var(--main-color);
+	font: 2rem;
+}
+.btn {
+	background-color: var(--main-color);
+	outline: none;
+	border: 2px solid var(--secondary-color);
+	color: #ffffff;
+	border-radius: 2rem;
+	font-size: 2rem;
+	cursor: pointer;
+}
+.btn:hover {
+	background-color: rgb(140, 125, 112);
+	border: 2px solid var(--main-color);
+	transition: all 0.7s ease;
+}
+.start-page {
+	display: none;
+}
+.board-game {
+	display: none;
+}
+.start-page.show {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.board-game.show {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+.heading {
+	font-size: 1rem;
+}
+.player {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+}
+.player label {
+	font-size: 1.5rem;
+}
+.player input {
+	padding: 6px;
+	border-radius: 8px;
+	border: none;
+}
+.player input:focus {
+	outline: none;
+	border: none;
+}
+
+/* Board */
+.board {
+	width: var(--main-size);
+	height: var(--main-size);
+	display: flex;
+	flex-wrap: wrap;
+	color: #fff;
+}
+
+.box {
+	border: 2px solid #fff;
+	width: calc(var(--main-size) / 3);
+	height: calc(var(--main-size) / 3);
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.box.x,
+.box.circle {
+	cursor: not-allowed;
+}
+.box:nth-child(3n + 3) {
+	border-right: none;
+}
+.box:nth-child(3n + 1) {
+	border-left: none;
+}
+.box:first-child,
+.box:nth-child(2),
+.box:nth-child(3) {
+	border-top: none;
+}
+.box:last-child,
+.box:nth-child(7),
+.box:nth-child(8) {
+	border-bottom: none;
+}
+.box::before,
+.box::after {
+	background-color: #fff;
+}
+.box::before,
+.box::after,
+.board.x .box:not(.x):not(.circle):hover::before,
+.board.x .box:not(.x):not(.circle):hover::after {
+	content: '';
+	position: absolute;
+	width: calc(var(--main-size) / 3 * 0.9);
+}
+.board.x .box:not(.x):not(.circle):hover::before,
+.board.x .box:not(.x):not(.circle):hover::after {
+	background-color: rgb(221, 221, 221);
+}
+/* X */
+.box.x::before,
+.box.x::after,
+.board.x .box:not(.x):not(.circle):hover::before,
+.board.x .box:not(.x):not(.circle):hover::after {
+	height: 8px;
+}
+.box.x::before,
+.board.x .box:not(.x):not(.circle):hover::before {
+	transform: rotate(45deg);
+}
+.box.x::after,
+.board.x .box:not(.x):not(.circle):hover::after {
+	transform: rotate(-45deg);
+}
+
+/*  O */
+
+.box.circle::before {
+	background-color: #fff;
+}
+.box.circle::after {
+	background-color: var(--secondary-color);
+}
+.box.circle::before,
+.box.circle::after,
+.board.circle .box:not(.x):not(.circle):hover::before,
+.board.circle .box:not(.x):not(.circle):hover::after {
+	border-radius: 50%;
+}
+.box.circle::before,
+.board.circle .box:not(.x):not(.circle):hover::before {
+	width: calc(var(--main-size) / 3 * 0.8);
+	height: calc(var(--main-size) / 3 * 0.8);
+}
+.box.circle::after,
+.board.circle .box:not(.x):not(.circle):hover::after {
+	width: calc(var(--main-size) / 3 * 0.65);
+	height: calc(var(--main-size) / 3 * 0.65);
+}
+.board.circle .box:not(.x):not(.circle):hover::before {
+	background-color: rgb(221, 221, 221);
+}
+.board.circle .box:not(.x):not(.circle):hover::after {
+	background-color: var(--secondary-color);
+}
+.box.winner::before,
+.box.x.winner::after {
+	background-color: var(--main-color);
+}
+/* restart modal */
+.restart-page {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.85);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform: scale(0);
+	border-radius: 100%;
+	transition: all 0.6s ease;
+}
+.restart-page {
+	text-align: center;
+}
+.restart-page #restart-btn {
+	padding: 2px 15px;
+}
+.restart-page.show {
+	transform: scale(1);
+	border-radius: 0;
+}
